@@ -15,28 +15,36 @@ export default function Footer_Layout({ footer, currentLang }: { footer: any[]; 
                         <Link prefetch href={`/${currentLang}`}>
                             <img className="w-[300px]" src="/LogoWhite.png" />
                         </Link>
-                        {footer.map((item, i) => (
-                            <div key={i}>
-                                <Link
-                                    prefetch
-                                    href={`/${item.lang_code}${item.path.startsWith("/") ? item.path : "/" + item.path}`}
-                                    onMouseEnter={() => setHoveredIndex(i)}
-                                    onMouseLeave={() => setHoveredIndex(null)}
-                                >
-                                    <div className="flex flex-col">
-                                        <p className="text-white">{item.title}</p>
-                                    </div>
-                                    <motion.div
-                                        className="h-[1px] bg-white"
-                                        initial={{ width: 0 }}
-                                        animate={{
-                                            width: hoveredIndex === i ? "100%" : 0,
-                                        }}
-                                        transition={{ duration: 0.3 }}
-                                    />
-                                </Link>
-                            </div>
-                        ))}
+                        {footer.map((item, i) => {
+                            const isExternal = item.path.startsWith("http");
+
+                            const href = isExternal ? item.path : `/${item.lang_code}${item.path.startsWith("/") ? item.path : "/" + item.path}`;
+
+                            return (
+                                <div key={i}>
+                                    <Link
+                                        prefetch={!isExternal}
+                                        href={href}
+                                        target={isExternal ? "_blank" : "_self"}
+                                        rel={isExternal ? "noopener noreferrer" : undefined}
+                                        onMouseEnter={() => setHoveredIndex(i)}
+                                        onMouseLeave={() => setHoveredIndex(null)}
+                                    >
+                                        <div className="flex flex-col">
+                                            <p className="text-white">{item.title}</p>
+                                        </div>
+                                        <motion.div
+                                            className="h-[1px] bg-white"
+                                            initial={{ width: 0 }}
+                                            animate={{
+                                                width: hoveredIndex === i ? "100%" : 0,
+                                            }}
+                                            transition={{ duration: 0.3 }}
+                                        />
+                                    </Link>
+                                </div>
+                            );
+                        })}
                         <div className="flex space-x-[50px]">
                             <Pinterest />
                             <Instagram />
