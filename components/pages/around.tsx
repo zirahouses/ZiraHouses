@@ -10,10 +10,13 @@ export default async function AroundUs({ lang, slug }: { lang: string; slug: str
 
     const { data: pageheading, error: headingError } = await supabase.from("page_heading").select("*").eq("page", "around").eq("lang", lang).single();
 
+    const { data: buttonText, error: buttonError } = await supabase.from("button_text").select("title").eq("lang", lang).single();
+
     if (headingError || !pageheading || !pages) {
         return { notFound };
     }
 
+    console.log(buttonText);
     return (
         <div className="mb-[100px]">
             <PageHeading img={pageheading.image} title={pageheading.title}>
@@ -31,7 +34,7 @@ export default async function AroundUs({ lang, slug }: { lang: string; slug: str
                     {pages.map((page: any, i: any) => (
                         <div key={i} className="col-span-3">
                             <Card title={page.title} text={page.description} img={page.image_link}>
-                                <Button text="Explore" href={`/${lang}/${slug}/${page.path}`}></Button>
+                                <Button text={buttonText?.title} href={`/${lang}/${slug}/${page.path}`}></Button>
                             </Card>
                         </div>
                     ))}
