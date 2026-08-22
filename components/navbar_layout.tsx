@@ -1,7 +1,7 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AnimatedHamburgerButton from "@/components/menu";
 import { Instagram, Pinterest } from "./socialsLogos";
 import Button from "./button";
@@ -15,6 +15,22 @@ export default function Navbar_Layout({ navbar, lang, currentLang, button }: { n
     const handleIsOpen = () => {
         setIsOpen((prev) => !prev);
     };
+
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const scrollY = window.scrollY;
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.width = "100%";
+
+        return () => {
+            document.body.style.position = "";
+            document.body.style.top = "";
+            document.body.style.width = "";
+            window.scrollTo(0, scrollY);
+        };
+    }, [isOpen]);
 
     return (
         <div className="relative text-white z-30 flex justify-center">

@@ -1,6 +1,6 @@
 import { supabase } from "@/lib/supabaseClient";
 import { notFound } from "next/navigation";
-import Reviews_Slider from "./reviews_slider";
+import ReviewsGrid from "./reviewsGrid";
 import { formatReviewDate } from "@/app/utils/formatReviewDate";
 
 export default async function Reviews({ lang }: { lang: string }) {
@@ -34,7 +34,7 @@ export default async function Reviews({ lang }: { lang: string }) {
                     <div className="bg-black h-[1px] flex-1" />
                 </div>
                 <div className="mt-[50px] col-span-full">
-                    <Reviews_Slider reviews={localizedReviews} />
+                    <ReviewsGrid reviews={localizedReviews} lang={lang} modalTitle={pageheading.title} />
                 </div>
             </div>
         </div>
