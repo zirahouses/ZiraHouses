@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { notFound, redirect } from "next/navigation";
 import MansonryLayout from "@/components/masonry";
 import PageHeading from "@/components/pageHeading";
+import AroundRestaurants from "@/components/pages/aroundRestaurants";
 
 type Params = Promise<{ lang: string; slug: string; path: string }>;
 
@@ -77,6 +78,18 @@ export default async function Pagina({ params }: { params: Params }) {
     const page = allPages?.find((p) => p.path.replace(/^\//, "") === cleanPath);
     if (!page) notFound();
 
+    if (route.route_key === "restaurant") {
+        return (
+            <div className="mb-[100px]">
+                <PageHeading img={page.image_link} title={page.title}>
+                    <p>{page.description}</p>
+                </PageHeading>
+
+                <AroundRestaurants lang={lang} />
+            </div>
+        );
+    }
+
     const { data: fixedInfo, error: fixedError } = await supabase
         .from("around_us_fixed_info")
         .select("*")
@@ -95,9 +108,6 @@ export default async function Pagina({ params }: { params: Params }) {
         .in("Info", fixedNames);
     if (!content) notFound();
 
-    /* ─────────────────────────────
-       5. Ordenação pelos ids
-    ──────────────────────────────*/
     const contentByInfo = new Map(content.map((c) => [c.Info, c]));
     const fixedInfoById = new Map(fixedInfo.map((f) => [f.id, f]));
 

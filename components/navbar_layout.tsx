@@ -64,7 +64,7 @@ export default function Navbar_Layout({ navbar, lang, currentLang, button }: { n
                                         onMouseLeave={() => setHoveredIndex(null)}
                                         onClick={handleIsOpen}
                                     >
-                                        <h2 className="text-black">{item.title}</h2>
+                                        <h2 className="text-black text-center">{item.title}</h2>
                                         <motion.div
                                             className="h-[2px] bg-black"
                                             initial={{ width: 0 }}

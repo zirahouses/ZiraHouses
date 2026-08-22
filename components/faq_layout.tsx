@@ -23,7 +23,7 @@ export default function Faq_Layout({ faq, lang }: { faq: any[]; lang: string }) 
     return (
         <div className="gridLayout grid ">
             <div
-                className={`col-start-1 col-span-full lg:col-start-2 lg:col-span-9 flex flex-col bg-white py-[50px] mt-[120px] lg:px-[50px] px-[10px] mx-[10px] lg:mx-0 overflow-y-hidden`}
+                className={`col-start-1 col-span-full lg:col-start-2 lg:col-span-9 flex flex-col bg-white py-[50px] mt-[120px] lg:px-[50px] px-[10px] common-margin overflow-y-hidden`}
             >
                 {faq.map((item, faqIndex) => (
                     <div key={faqIndex} className={`flex flex-col gap-y-[50px] relative `} style={{ zIndex: faqIndex }}>
