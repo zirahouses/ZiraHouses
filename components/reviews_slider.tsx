@@ -8,6 +8,7 @@ export default function Reviews_Slider({ reviews }: { reviews: any[] }) {
     return (
         <div className="relative">
             <Swiper
+                autoHeight
                 spaceBetween={20}
                 breakpoints={{
                     // when window width is >= 320px

@@ -53,8 +53,8 @@ p {
 }
 
 .common-margin {
-    margin-right: 40px;
-    margin-left: 40px;
+    margin-right: 45px;
+    margin-left: 45px;
 }
 
 @media screen and (max-width: 1024px) {

@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabaseClient";
 import { notFound } from "next/navigation";
 import Reviews_Slider from "./reviews_slider";
+import { formatReviewDate } from "@/app/utils/formatReviewDate";
 
 export default async function Reviews({ lang }: { lang: string }) {
     const [
@@ -19,6 +20,12 @@ export default async function Reviews({ lang }: { lang: string }) {
         return <h3>REVIEWS NOT FOUND</h3>;
     }
 
+    const localizedReviews = reviews.map((review: any) => ({
+        name: review.name,
+        comment: review[`review_${lang}`] ?? review.review_en,
+        date: formatReviewDate(review.date, lang),
+    }));
+
     return (
         <div className="flex justify-center">
             <div className="max-w-[1920px] col-start-2 col-span-9 grid grid-cols-9 gap-x-[20px] pt-[100px] common-margin">
@@ -27,7 +34,7 @@ export default async function Reviews({ lang }: { lang: string }) {
                     <div className="bg-black h-[1px] flex-1" />
                 </div>
                 <div className="mt-[50px] col-span-full">
-                    <Reviews_Slider reviews={reviews} />
+                    <Reviews_Slider reviews={localizedReviews} />
                 </div>
             </div>
         </div>
