@@ -13,11 +13,11 @@ export default async function About({ lang }: { lang: string }) {
     ]);
 
     if (roomsError || !rooms) {
-        return { notFound };
+        notFound();
     }
 
     if (headingError || !pageheading) {
-        return { notFound };
+        notFound();
     }
 
     return (

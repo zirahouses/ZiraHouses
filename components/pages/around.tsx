@@ -13,7 +13,7 @@ export default async function AroundUs({ lang, slug }: { lang: string; slug: str
     ]);
 
     if (headingError || !pageheading || !pages) {
-        return { notFound };
+        notFound();
     }
 
     return (
