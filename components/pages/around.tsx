@@ -6,17 +6,16 @@ import PageHeading from "@/components/pageHeading";
 import { getFilteredContentByLanguage } from "@/app/utils/getFilteredContentByLanguage";
 
 export default async function AroundUs({ lang, slug }: { lang: string; slug: string }) {
-    const pages = await getFilteredContentByLanguage("around_us", lang);
-
-    const { data: pageheading, error: headingError } = await supabase.from("page_heading").select("*").eq("page", "around").eq("lang", lang).single();
-
-    const { data: buttonText, error: buttonError } = await supabase.from("button_text").select("title").eq("lang", lang).single();
+    const [pages, { data: pageheading, error: headingError }, { data: buttonText }] = await Promise.all([
+        getFilteredContentByLanguage("around_us", lang),
+        supabase.from("page_heading").select("*").eq("page", "around").eq("lang", lang).single(),
+        supabase.from("button_text").select("title").eq("lang", lang).single(),
+    ]);
 
     if (headingError || !pageheading || !pages) {
         return { notFound };
     }
 
-    console.log(buttonText);
     return (
         <div className="mb-[100px]">
             <PageHeading img={pageheading.image} title={pageheading.title}>

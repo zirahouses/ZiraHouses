@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabaseClient";
+import { getRoutes } from "@/lib/cachedQueries";
 import { notFound, redirect } from "next/navigation";
 import MansonryLayout from "@/components/masonry";
 import PageHeading from "@/components/pageHeading";
@@ -11,9 +12,8 @@ export default async function Pagina({ params }: { params: Params }) {
     const cleanPath = path.replace(/^\//, "");
 
     // Buscar todas as rotas para o idioma atual e todas as línguas
-    const { data: allRoutes, error: routesError } = await supabase.from("routes").select("path, route_key, lang_code");
-
-    if (routesError || !allRoutes) {
+    const allRoutes = await getRoutes();
+    if (allRoutes.length === 0) {
         notFound();
     }
 

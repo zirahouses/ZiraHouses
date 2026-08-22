@@ -3,9 +3,11 @@ import "@/app/globals.css";
 import FloatingButton from "@/components/floatingButton";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import Head from "next/head";
 
 export const metadata: Metadata = {
+    title: "Zira Houses | Holiday Home on Portugal's Silver Coast",
+    description:
+        "Zira Houses is a family-friendly holiday home near Nazaré and Alcobaça on Portugal's Silver Coast, ideal for families and travelers who love nature and the beach.",
     icons: {
         icon: "/favicon.png",
     },
@@ -68,9 +70,6 @@ export default async function LangLayout({ children, params }: { children: React
     const { lang } = await params;
     return (
         <html lang={lang}>
-            <Head>
-                <meta property="og:image" content="/Banner.jpg" />
-            </Head>
             <body>
                 <div>
                     <Navbar language={lang} />

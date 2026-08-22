@@ -3,8 +3,13 @@ import { notFound } from "next/navigation";
 import Reviews_Slider from "./reviews_slider";
 
 export default async function Reviews({ lang }: { lang: string }) {
-    const { data: reviews, error: error1 } = await supabase.from("reviews").select("*").order("id", { ascending: false });
-    const { data: pageheading, error } = await supabase.from("page_heading").select("*").eq("page", "reviews").eq("lang", lang).single();
+    const [
+        { data: reviews, error: error1 },
+        { data: pageheading, error },
+    ] = await Promise.all([
+        supabase.from("reviews").select("*").order("id", { ascending: false }),
+        supabase.from("page_heading").select("*").eq("page", "reviews").eq("lang", lang).single(),
+    ]);
 
     if (error || !pageheading) {
         notFound();

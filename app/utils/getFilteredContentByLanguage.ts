@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabaseClient";
+import { getRoutes } from "@/lib/cachedQueries";
 
 // Define o tipo de dado que existe na tabela de rotas
 type Route = {
@@ -18,9 +19,9 @@ type Route = {
  */
 export async function getFilteredContentByLanguage<T>(tableName: string, language: string): Promise<T[] | null> {
     const { data: tableData, error: tableError } = await supabase.from(tableName).select("*").order("id", { ascending: true });
-    const { data: routes, error: routesError } = await supabase.from("routes").select("*");
+    const routes = await getRoutes();
 
-    if (tableError || routesError || !tableData || !routes) {
+    if (tableError || !tableData || routes.length === 0) {
         return null;
     }
 

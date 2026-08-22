@@ -32,7 +32,7 @@ export default function RestaurantCard({
 }) {
     return (
         <div className="w-full flex flex-col">
-            {restaurant.image && <img src={restaurant.image} className="w-full h-[300px] object-cover" />}
+            {restaurant.image && <img src={restaurant.image} alt={restaurant.title} className="w-full h-[300px] object-cover" />}
             <div
                 className={`bg-white xl:mx-[20px] lg:mx-0 md:mx-[20px] p-[20px] flex flex-col gap-y-[20px] ${
                     restaurant.image ? "-mt-[50px]" : "mt-0"

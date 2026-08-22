@@ -25,7 +25,7 @@ export default function Navbar_Layout({ navbar, lang, currentLang, button }: { n
                 </div>
                 <div className="col-start-3 col-span-7 flex justify-center">
                     <Link prefetch href={`/${currentLang}`}>
-                        <img className="w-[300px]" src={isOpen ? "/LogoBlack.png" : "/LogoWhite.png"} />
+                        <img className="w-[300px]" src={isOpen ? "/LogoBlack.png" : "/LogoWhite.png"} alt="Zira Houses" />
                     </Link>
                 </div>
                 <div className="col-start-10  space-x-[50px]  items-center lg:flex hidden">

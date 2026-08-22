@@ -1,13 +1,13 @@
-import { supabase } from "@/lib/supabaseClient";
+import { getLanguages } from "@/lib/cachedQueries";
 import { notFound } from "next/navigation";
 import Navbar_Layout from "./navbar_layout";
 import { getFilteredContentByLanguage } from "@/app/utils/getFilteredContentByLanguage";
 import BookButton from "./bookButton";
 
 export default async function Navbar({ language }: { language: string }) {
-    const { data: lang_select, error: LangSelectError } = await supabase.from("languages").select("*");
+    const lang_select = await getLanguages();
 
-    if (LangSelectError || !lang_select) {
+    if (lang_select.length === 0) {
         notFound();
     }
 

@@ -4,8 +4,13 @@ import { supabase } from "@/lib/supabaseClient";
 import { notFound } from "next/navigation";
 
 export default async function About({ lang }: { lang: string }) {
-    const { data: rooms, error: roomsError } = await supabase.from("rooms").select("*").eq("lang", lang).order("id", { ascending: true });
-    const { data: pageheading, error: headingError } = await supabase.from("page_heading").select("*").eq("page", "about").eq("lang", lang).single();
+    const [
+        { data: rooms, error: roomsError },
+        { data: pageheading, error: headingError },
+    ] = await Promise.all([
+        supabase.from("rooms").select("*").eq("lang", lang).order("id", { ascending: true }),
+        supabase.from("page_heading").select("*").eq("page", "about").eq("lang", lang).single(),
+    ]);
 
     if (roomsError || !rooms) {
         return { notFound };

@@ -13,7 +13,7 @@ export default function Footer_Layout({ footer, currentLang }: { footer: any[]; 
                 <div className="w-screen grid grid-cols-11 py-[50px] max-w-[2560px]">
                     <div className="col-start-2 col-span-9 flex lg:flex-row flex-col lg:space-y-0 space-y-[50px] items-center justify-between ">
                         <Link prefetch href={`/${currentLang}`}>
-                            <img className="w-[300px]" src="/LogoWhite.png" />
+                            <img className="w-[300px]" src="/LogoWhite.png" alt="Zira Houses" />
                         </Link>
                         {footer.map((item, i) => {
                             const isExternal = item.path.startsWith("http");

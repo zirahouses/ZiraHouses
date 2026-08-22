@@ -3,7 +3,7 @@ export default function Card(props: any) {
         <div className={`w-full h-full flex flex-col ${props.className}`}>
             {props.img && (
                 <div>
-                    <img src={props.img} className="w-full h-[300px] object-cover " />
+                    <img src={props.img} alt={props.title || ""} className="w-full h-[300px] object-cover " />
                 </div>
             )}
             <div

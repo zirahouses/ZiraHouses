@@ -23,7 +23,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <div className="relative col-start-1 col-span-full ">
                 <div className="relative">
                     <div className="bg-black/30 w-full h-full absolute top-0 left-0" />
-                    <img className="w-full lg:max-h-[900px] lg:h-[75vh] md:h-[55vh] h-[50vh] object-cover" src={pageheading.image} />
+                    <img
+                        className="w-full lg:max-h-[900px] lg:h-[75vh] md:h-[55vh] h-[50vh] object-cover"
+                        src={pageheading.image}
+                        alt={pageheading.title.replace(/\\n/g, " ")}
+                    />
                 </div>
                 <div className="flex justify-center">
                     <div className="absolute top-[30%] lg:grid lg:gridLayout w-full max-w-[1920px]">
